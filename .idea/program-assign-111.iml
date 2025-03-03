@@ -1,8 +1,296 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module type="PYTHON_MODULE" version="4">
-  <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
-    <orderEntry type="inheritedJdk" />
-    <orderEntry type="sourceFolder" forTests="false" />
-  </component>
-</module>
+class Order: #order class
+    def __init__(self, ordernumber, itemcode, description, quantity, unitprice): #constructor intializing class attributes and making them private
+        self.__ordernumber = ordernumber
+        self.__itemcode = itemcode
+        self.__description = description
+        self.__quantity = quantity
+        self.__unitprice = unitprice
+        self.__totalprice = self.__quantity * self.__unitprice
+
+    def getOrdernumber(self):   #setters and getters
+        return self.__ordernumber
+
+    def setOrdernumber(self, ordernumber):
+        self.__ordernumber = ordernumber
+
+    def getItemcode(self):
+        return self.__itemcode
+
+    def setItemcode(self, itemcode):
+        self.__itemcode = itemcode
+
+    def getDescription(self):
+        return self.__description
+
+    def setDescription(self, description):
+        self.__description = description
+
+    def getQuantity(self):
+        return self.__quantity
+
+    def setQuantity(self, quantity):
+        self.__quantity = quantity
+        self.__totalprice = self.__quantity * self.__unitprice
+
+    def getUnitprice(self):
+        return self.__unitprice
+
+    def setUnitprice(self, unitprice):
+        self.__unitprice = unitprice
+        self.__totalprice = self.__quantity * self.__unitprice
+
+    def getTotalprice(self):
+        return self.__totalprice
+
+    def setTotalprice(self, totalprice):
+        self.__totalprice = totalprice
+
+    def displayOrder(self):  # display function to display objects
+        print(f'Order Number: {self.getOrdernumber()}, Item Code: {self.getItemcode()}, Description: {self.getDescription()}, Quantity: {self.getQuantity()}, Unit Price: ${self.getUnitprice():.2f}, Total Price: ${self.getTotalprice():.2f}')
+        
+        
+        
+
+class DeliveryDetails:  #class for delivery details 
+    def __init__(self, ordernumber, referencenumber, deliverydate, deliverymethod, packagedimensions, totalweight, recipientname, recipientcontact, deliveryaddress):    #constructor to intialize attributes
+        self.__ordernumber = ordernumber   #attributes made private
+        self.__referencenumber = referencenumber
+        self.__deliverydate = deliverydate
+        self.__deliverymethod = deliverymethod
+        self.__packagedimensions = packagedimensions
+        self.__totalweight = totalweight
+        self.__recipientname = recipientname
+        self.__recipientcontact = recipientcontact
+        self.__deliveryaddress = deliveryaddress
+
+    def getOrdernumber(self):  #setters and getters functions 
+        return self.__ordernumber
+
+    def setOrdernumber(self, ordernumber):
+        self.__ordernumber = ordernumber
+
+    def getReferencenumber(self):
+        return self.__referencenumber
+
+    def setReferencenumber(self, referencenumber):
+        self.__referencenumber = referencenumber
+
+    def getDeliverydate(self):
+        return self.__deliverydate
+
+    def setDeliverydate(self, deliverydate):
+        self.__deliverydate = deliverydate
+
+    def getDeliverymethod(self):
+        return self.__deliverymethod
+
+    def setDeliverymethod(self, deliverymethod):
+        self.__deliverymethod = deliverymethod
+
+    def getPackagedimensions(self):
+        return self.__packagedimensions
+
+    def setPackagedimensions(self, packagedimensions):
+        self.__packagedimensions = packagedimensions
+
+    def getTotalweight(self):
+        return self.__totalweight
+
+    def setTotalweight(self, totalweight):
+        self.__totalweight = totalweight
+
+    def getRecipientname(self):
+        return self.__recipientname
+
+    def setRecipientname(self, recipientname):
+        self.__recipientname = recipientname
+
+    def getRecipientcontact(self):
+        return self.__recipientcontact
+
+    def setRecipientcontact(self, recipientcontact):
+        self.__recipientcontact = recipientcontact
+
+    def getDeliveryaddress(self):
+        return self.__deliveryaddress
+
+    def setDeliveryaddress(self, deliveryaddress):
+        self.__deliveryaddress = deliveryaddress
+
+    def displayDeliveryDetails(self):  #display funtions to display a formatted string
+        print(f"Order Number: {self.getOrdernumber()}, Reference Number: {self.getReferencenumber()}, Delivery Date: {self.getDeliverydate()}, Delivery Method: {self.getDeliverymethod()}, Package Dimensions: {self.getPackagedimensions()}, Total Weight: {self.getTotalweight()} kg, Recipient Name: {self.getRecipientname()}, Recipient Contact: {self.getRecipientcontact()}, Delivery Address: {self.getDeliveryaddress()}")
+        
+
+
+
+class CalculatedCharges:  #class for calculated charges
+    def __init__(self, subtotal, taxesandfees, currency): #constructor to intialize attributes
+        self.__subtotal = subtotal
+        self.__taxesandfees = taxesandfees   #attributes made private
+        self.__totalcharges = subtotal + taxesandfees #calculation gives us total charges 
+        self.__currency = currency
+
+    def getSubtotal(self):
+        return self.__subtotal     #setter and getter functions
+
+    def setSubtotal(self, subtotal):  
+        self.__subtotal = subtotal    
+        self.__totalcharges = self.__subtotal + self.__taxesandfees
+
+    def getTaxesandfees(self):
+        return self.__taxesandfees
+
+    def setTaxesandfees(self, taxesandfees):
+        self.__taxesandfees = taxesandfees
+        self.__totalcharges = self.__subtotal + self.__taxesandfees
+
+    def getTotalcharges(self):
+        return self.__totalcharges
+
+    def setTotalcharges(self, totalcharges):
+        self.__totalcharges = totalcharges
+
+    def getCurrency(self):
+        return self.__currency
+
+    def setCurrency(self, currency):
+        self.__currency = currency
+
+    def displayCalculatedCharges(self):  #display function for formated string
+        print(f"Subtotal: {self.getSubtotal():.2f}, Taxes and Fees: {self.getTaxesandfees():.2f}, Total Charges: {self.getTotalcharges():.2f}, Currency: {self.getCurrency()}")
+        
+        
+        
+        
+from enum import Enum  #import enum
+
+class ReturnStatus(Enum):
+    Pending = 1         #three different enums
+    Approved = 2
+    Denied = 3
+
+class ReturnRequest:   #class for requesting a return 
+    def __init__(self, ordernumber, returnreason, returnstatus, returndate, refundamount):   #constructor to intialize attributes
+        self.__ordernumber = ordernumber   #attributes made private 
+        self.__returnreason = returnreason
+        self.__returnstatus = ReturnStatus[returnstatus]  
+        self.__returndate = returndate
+        self.__refundamount = refundamount
+
+    def getOrdernumber(self):
+        return self.__ordernumber        #setters and getters for attributes 
+
+    def setOrdernumber(self, ordernumber):
+        self.__ordernumber = ordernumber
+
+    def getReturnreason(self):
+        return self.__returnreason
+
+    def setReturnreason(self, returnreason):
+        self.__returnreason = returnreason
+
+    def getReturnstatus(self):
+        return self.__returnstatus
+
+    def setReturnstatus(self, returnstatus):
+        self.__returnstatus = ReturnStatus[returnstatus]  
+
+    def getReturndate(self):
+        return self.__returndate
+
+    def setReturndate(self, returndate):
+        self.__returndate = returndate
+
+    def getRefundamount(self):
+        return self.__refundamount
+
+    def setRefundamount(self, refundamount):
+        self.__refundamount = refundamount
+
+    def displayReturnRequest(self):
+        print(f"Order Number: {self.getOrdernumber()}, Return Reason: {self.getReturnreason()}, Return Status: {self.getReturnstatus().name}, Return Date: {self.getReturndate()}, Refund Amount: {self.getRefundamount():.2f}")
+
+
+
+class SchedulePickUp: #shedule pickup class
+    def __init__(self, ordernumber, pickupaddress, pickupdate, timeslot, assigneddeliverystaff):  #constructor to intialize attributes
+        self.__ordernumber = ordernumber
+        self.__pickupaddress = pickupaddress
+        self.__pickupdate = pickupdate    #make attributes private
+        self.__timeslot = timeslot
+        self.__assigneddeliverystaff = assigneddeliverystaff
+
+    def getOrdernumber(self):    #setters and getters for attributes
+        return self.__ordernumber
+
+    def setOrdernumber(self, ordernumber):
+        self.__ordernumber = ordernumber
+
+    def getPickupaddress(self):
+        return self.__pickupaddress
+
+    def setPickupaddress(self, pickupaddress):
+        self.__pickupaddress = pickupaddress
+
+    def getPickupdate(self):
+        return self.__pickupdate
+
+    def setPickupdate(self, pickupdate):
+        self.__pickupdate = pickupdate
+
+    def getTimeslot(self):
+        return self.__timeslot
+
+    def setTimeslot(self, timeslot):
+        self.__timeslot = timeslot
+
+    def getAssigneddeliverystaff(self):
+        return self.__assigneddeliverystaff
+
+    def setAssigneddeliverystaff(self, assigneddeliverystaff):
+        self.__assigneddeliverystaff = assigneddeliverystaff
+
+    def displayShedulePickup(self):
+        print(f"Order Number: {self.getOrdernumber()}, Pickup Address: {self.getPickupaddress()}, Pickup Date: {self.getPickupdate()}, Time Slot: {self.getTimeslot()}, Assigned Delivery Staff: {self.getAssigneddeliverystaff()}")
+
+
+
+
+# Creating and displaying DeliveryDetails
+delivery_details_example = DeliveryDetails(
+    ordernumber="DEL123456789", referencenumber="DN-2025-001",
+    deliverydate="January 25, 2025", deliverymethod="Courier",
+    packagedimensions="Multiple small items", totalweight=7,
+    recipientname="Sarah Johnson", recipientcontact="sarah.johnson@example.com",
+    deliveryaddress="45 Knowledge Avenue, Dubai, UAE"
+)
+delivery_details_example.displayDeliveryDetails()
+
+# Creating and displaying Orders
+order_1 = Order(ordernumber="DEL123456789", itemcode="ITM001", description="Wireless Keyboard", quantity=1, unitprice=100.00)
+order_2 = Order(ordernumber="DEL123456789", itemcode="ITM002", description="Wireless Mouse & Pad Set", quantity=1, unitprice=75.00)
+order_3 = Order(ordernumber="DEL123456789", itemcode="ITM003", description="Laptop Cooling Pad", quantity=1, unitprice=120.00)
+order_4 = Order(ordernumber="DEL123456789", itemcode="ITM004", description="Camera Lock", quantity=3, unitprice=15.00)
+order_1.displayOrder()
+order_2.displayOrder()
+order_3.displayOrder()
+order_4.displayOrder()
+
+# Creating and displaying CalculatedCharges
+calculated_charges_example = CalculatedCharges(subtotal=270.00, taxesandfees=13.50, currency="AED")
+calculated_charges_example.displayCalculatedCharges()
+
+# Creating and displaying ReturnRequest
+return_request_example = ReturnRequest(
+    ordernumber="DEL123456789", returnreason="Changed my mind",
+    returnstatus="Pending", returndate="January 27, 2025", refundamount=195.00
+)
+return_request_example.displayReturnRequest()
+
+# Creating and displaying SchedulePickUp
+schedule_pickup_example = SchedulePickUp(
+    ordernumber="DEL123456790", pickupaddress="45 Knowledge Avenue, Dubai, UAE",
+    pickupdate="February 10, 2025", timeslot="9:00 AM - 11:00 AM",
+    assigneddeliverystaff="Ahmed Alhashmi"
+)
+schedule_pickup_example.displayShedulePickup()
